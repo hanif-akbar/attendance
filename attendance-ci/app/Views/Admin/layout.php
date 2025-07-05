@@ -50,7 +50,7 @@
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="index.html" class="logo d-flex align-items-center">
+      <a href="https://www.riaputrametalindo.com/" class="logo d-flex align-items-center">
         <img src="<?= base_url('assets/img/logo-rpm.png') ?>" alt="">
         <span class="d-none d-lg-block">PT.RIAPUTRA METALINDO</span>
       </a>
@@ -64,7 +64,7 @@
 
         <li class="nav-item d-block d-lg-none">
           <a class="nav-link nav-icon search-bar-toggle " href="#">
-            <i class="bi bi-search"></i>
+            <i class=""></i>
           </a>
         </li><!-- End Search Icon-->
 
@@ -155,28 +155,28 @@
         </ul>
       </li><!-- End Components Nav -->
 
-      <!-- <li class="nav-item">
+      <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-table"></i><span>Rekap Presensi</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="forms-elements.html">
+            <a href=" <?= base_url('admin/rekap_harian') ?> ">
               <i class="bi bi-circle"></i><span>Rekap Harian</span>
             </a>
           </li>
           <li>
-            <a href="forms-layouts.html">
+            <a href="<?= base_url('admin/rekap_mingguan') ?>">
               <i class="bi bi-circle"></i><span>Rekap Mingguan</span>
             </a>
           </li>
           <li>
-            <a href="forms-editors.html">
+            <a href="<?= base_url('admin/rekap_bulanan')?>">
               <i class="bi bi-circle"></i><span>Rekap Bulanan</span>
             </a>
           </li>
         </ul>
-      </li> -->
+      </li>
       <!-- End Forms Nav -->
 
       <!-- <li class="nav-item">

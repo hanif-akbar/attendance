@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
+<html>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
@@ -39,6 +39,9 @@
      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
      crossorigin=""></script>
 
+
+     
+  
   <!-- =======================================================
   * Template Name: NiceAdmin
   * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
@@ -68,7 +71,7 @@
 
         <li class="nav-item d-block d-lg-none">
           <a class="nav-link nav-icon search-bar-toggle " href="#">
-            <i class="bi bi-search"></i>
+            <i class=""></i>
           </a>
         </li><!-- End Search Icon-->
 
@@ -99,9 +102,9 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+              <a class="dropdown-item d-flex align-items-center" href="<?= base_url('pegawai/ubah_password') ?>">
                 <i class="bi bi-gear"></i>
-                <span>Account Settings</span>
+                <span>Ubah Password</span>
               </a>
             </li>
             <li>
@@ -160,17 +163,17 @@
       </li> -->
       <!-- End Components Nav -->
 
-      <!-- <li class="nav-item">
+      <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-table"></i><span>Rekap Presensi</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="forms-elements.html">
-              <i class="bi bi-circle"></i><span>Rekap Harian</span>
+            <a href="<?= base_url('pegawai/rekap_presensi') ?>">
+              <i class="bi bi-circle"></i><span>Rekap Presensi</span>
             </a>
           </li>
-          <li>
+          <!-- <li>
             <a href="forms-layouts.html">
               <i class="bi bi-circle"></i><span>Rekap Mingguan</span>
             </a>
@@ -179,9 +182,9 @@
             <a href="forms-editors.html">
               <i class="bi bi-circle"></i><span>Rekap Bulanan</span>
             </a>
-          </li>
+          </li> -->
         </ul>
-      </li> -->
+      </li>
       <!-- End Forms Nav -->
 
       <!-- <li class="nav-item">
@@ -231,7 +234,7 @@
       <h1>Dashboard</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Pegawai</a></li>
+          <li class="breadcrumb-item"><a href="<?= base_url('pegawai/dashboard') ?>">Pegawai</a></li>
           <li class="breadcrumb-item active"><?= $title ?></li>
         </ol>
       </nav>
@@ -272,6 +275,54 @@
 
   <!-- Template Main JS File -->
   <script src="<?= base_url('assets/js/main.js')?>"></script>
+
+  <!-- sweet Alert -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+// sweet alert
+    $(function(){
+      <?php if(session()->has('success')) { ?>
+        const Toast = Swal.mixin({
+  toast: true,
+  position: "top-end",
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.onmouseenter = Swal.stopTimer;
+    toast.onmouseleave = Swal.resumeTimer;
+  }
+});
+Toast.fire({
+  icon: "success",
+  title: "<?= session()->getFlashdata('success') ?>"
+});
+        <?php } ?>
+    })
+
+    // sweet alert konvirmation delete
+
+    $('.ubah-password').on('click', function(){
+      var getLink = $(this).attr('href');
+
+      Swal.fire({
+  title: "Yakin Ubah Password?",
+  text: "Password yang sudah di ubah harap di ingat!",
+  icon: "warning",
+  showCancelButton: true,
+  confirmButtonColor: "#3085d6",
+  cancelButtonColor: "#d33",
+  confirmButtonText: "Yes, change it!"
+}).then((result) => {
+  if (result.isConfirmed) {
+    window.location.href = getLink
+  }
+});
+    return false;
+    })
+</script>
+
 
 </body>
 </html>

@@ -40,6 +40,7 @@ class Presensi extends Migration
             ],
             'tanggal_keluar' => [
                 'type' => 'DATE',
+                'default' => null,
             ],
             'jam_keluar' => [
                 'type' => 'TIME',

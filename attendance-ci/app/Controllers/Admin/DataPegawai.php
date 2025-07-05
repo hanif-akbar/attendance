@@ -92,10 +92,10 @@ class DataPegawai extends BaseController
                 ],
             ],
             'foto' => [
-                'rules' => 'uploaded[foto]|is_image[foto]|mime_in[foto,image/jpg,image/jpeg,image/png]|max_size[foto,5048]',
+                'rules' => 'uploaded[foto]|is_image[foto]|mime_in[foto,image/jpg,image/jpeg,image/png]|max_size[foto,1048]',
                 'errors' => [
                     'required' => 'Foto Wajib diUploade',
-                    'max_size' => 'Ukuran Foto lebih dari 5MB',
+                    'max_size' => 'Ukuran Foto lebih dari 1MB',
                     'is_image' => 'Yang Anda Pilih Bukan Foto',
                     'mime_in' => 'Foto Harus JPG, JPEG, PNG',
                 ]
@@ -251,9 +251,9 @@ class DataPegawai extends BaseController
                 ],
             ],
             'foto' => [
-                'rules' => 'is_image[foto]|mime_in[foto,image/jpg,image/jpeg,image/png]|max_size[foto,5048]',
+                'rules' => 'is_image[foto]|mime_in[foto,image/jpg,image/jpeg,image/png]|max_size[foto,1048]',
                 'errors' => [
-                    'max_size' => 'Ukuran Foto lebih dari 5MB',
+                    'max_size' => 'Ukuran Foto lebih dari 1 MB',
                     'is_image' => 'Yang Anda Pilih Bukan Foto',
                     'mime_in' => 'Foto Harus JPG, JPEG, PNG',
                 ]

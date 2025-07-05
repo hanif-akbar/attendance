@@ -11,7 +11,7 @@ class UserSeeder extends Seeder
         $data = [
             'id_pegawai' => 1,
             'username' => 'admin',
-            'password' => password_hash('admin61257', PASSWORD_DEFAULT),
+            'password' => password_hash('admin', PASSWORD_DEFAULT),
             'status' => '',
             'role' => 'Admin',
         ];

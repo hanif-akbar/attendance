@@ -52,7 +52,7 @@ class Pegawai extends Migration
                 'type' => 'DATE',
             ],
             'tanggal_masuk' => [
-                'type' => 'DTAE',
+                'type' => 'DATE',
             ],
             'clock_in_out_location' => [
                 'type' => 'INT',
