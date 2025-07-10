@@ -49,6 +49,18 @@
             </div>
     </div>
     <div class="input-style-1">
+    <label>Divisi</label>
+    <div class="col-sm-10">
+        <select name="divisi" class="form-control <?= ($validation->hasError('divisi')) ? 'is-invalid' : '' ?>">
+            <option value="<?= $pegawai['divisi']?>"><?= $pegawai['divisi']?></option>
+            <?php foreach ($divisi as $div) : ?>
+                <option value="<?= $div['divisi'] ?>" <?= ($pegawai['divisi'] == $div['divisi']) ? 'selected' : '' ?>><?= $div['divisi'] ?></option>
+            <?php endforeach ?>
+        </select>
+        <div class="invalid-feedback"><?= $validation->getError('divisi')?></div>
+    </div>
+    </div>
+    <div class="input-style-1">
     <label>Jabatan</label>
     <div class="col-sm-10">
         <select name="jabatan" class="form-control <?= ($validation->hasError('jabatan')) ? 'is-invalid' : '' ?>">

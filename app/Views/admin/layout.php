@@ -138,13 +138,18 @@
         </a>
         <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="<?= base_url('admin/jabatan') ?>">
-              <i class="bi bi-circle"></i><span>Data Jabatan</span>
+            <a href="<?= base_url('admin/data_pegawai') ?>">
+              <i class="bi bi-circle"></i><span>Data Pegawai</span>
             </a>
           </li>
           <li>
-            <a href="<?= base_url('admin/data_pegawai') ?>">
-              <i class="bi bi-circle"></i><span>Data Pegawai</span>
+            <a href="<?= base_url('admin/divisi') ?>">
+              <i class="bi bi-circle"></i><span>Data Divisi</span>
+            </a>
+          </li>
+          <li>
+            <a href="<?= base_url('admin/jabatan') ?>">
+              <i class="bi bi-circle"></i><span>Data Jabatan</span>
             </a>
           </li>
           <!-- <li>

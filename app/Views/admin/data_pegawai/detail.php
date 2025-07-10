@@ -55,6 +55,11 @@
                 <td> <?=$pegawai['jabatan'] ?> </td>
             </tr>
             <tr>
+                <td>Divisi</td>
+                <td>:</td>
+                <td> <?=$pegawai['divisi'] ?> </td>
+            </tr>
+            <tr>
                 <td>Status Kepegawaian</td>
                 <td>:</td>
                 <td> <?=$pegawai['status'] ?> </td>

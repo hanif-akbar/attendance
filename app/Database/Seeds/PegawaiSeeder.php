@@ -14,6 +14,7 @@ class PegawaiSeeder extends Seeder
             'jenis_kelamin' => '-',
             'alamat' => '-',
             'no_handphone' => '000000000000',
+            'divisi' => 'Admin',
             'jabatan' => 'Admin',
             'foto' => 'admin.jpg',
             'tanggal_lahir' => '0000-00-00',

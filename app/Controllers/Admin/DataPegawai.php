@@ -3,6 +3,7 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
+use App\Models\DivisiModel;
 use App\Models\JabatanModel;
 use App\Models\PegawaiModel;
 use App\Models\UsersModel;
@@ -39,13 +40,14 @@ class DataPegawai extends BaseController
     }
 
     public function create(){
-        
+        $divisiModel = new DivisiModel();
         $jabatanModel = new JabatanModel();
         $clockInOutLocationModel = new ClockInOutLocationModel();
         $data = [
             'title' => 'Tambah data pegawai',
             'clock_in_out_location' => $clockInOutLocationModel->findAll(),
             'jabatan' => $jabatanModel->orderBy('jabatan','ASC')->findAll(),
+            'divisi' => $divisiModel->orderBy('divisi','ASC')->findAll(),
             'validation' => \Config\Services::validation(),
         ];
 
@@ -85,6 +87,12 @@ class DataPegawai extends BaseController
                     'required' => 'No Handphone Wajib Diisi'
                 ],
             ],
+            'divisi' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Divisi Wajib Diisi'
+                ],
+            ],
             'jabatan' => [
                 'rules' => 'required',
                 'errors' => [
@@ -118,6 +126,12 @@ class DataPegawai extends BaseController
                     'required' => 'Status Kepegawaian Wajib Diisi'
                 ],
             ],
+            'clock_in_out_location' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Zona Waktu Wajib Diisi'
+                ],
+            ],
             'username' => [
                 'rules' => 'required|is_unique[users.username]',
                 'errors' => [
@@ -142,12 +156,14 @@ class DataPegawai extends BaseController
 
         if (!$this->validate($rules)) {
             $jabatanModel = new JabatanModel();
+            $divisiModel = new DivisiModel();
             $clockInOutLocationModel = new ClockInOutLocationModel();
   
             $data = [
                 'title' => 'Tambah data pegawai',
                 'clock_in_out_location' => $clockInOutLocationModel->findAll(),
                 'jabatan' => $jabatanModel->orderBy('jabatan','ASC')->findAll(),
+                'divisi' => $divisiModel->orderBy('divisi','ASC')->findAll(),
                 'validation' => \Config\Services::validation(),
             ];
             
@@ -164,6 +180,7 @@ class DataPegawai extends BaseController
             }
 
             $pegawaiModel->insert([
+                'divisi' => $this->request->getPost('divisi'),
                 'jabatan' => $this->request->getPost('jabatan'),
                 'nip' => $this->request->getPost('nip'),
                 'nama' => $this->request->getPost('nama'),
@@ -196,6 +213,7 @@ class DataPegawai extends BaseController
 
     public function edit($id){
         $jabatanModel = new JabatanModel();
+        $divisiModel = new DivisiModel();
         $clockInOutLocationModel = new ClockInOutLocationModel();
         $pegawaiModel = new PegawaiModel();
         $data = [
@@ -203,6 +221,7 @@ class DataPegawai extends BaseController
             'pegawai' => $pegawaiModel->detailPegawai($id),
             'clock_in_out_location' => $clockInOutLocationModel->findAll(),
             'jabatan' => $jabatanModel->orderBy('jabatan','ASC')->findAll(),
+            'divisi' => $divisiModel->orderBy('divisi','ASC')->findAll(),
             'validation' => \Config\Services::validation(),
         ];
         // dd($data['jabatan']);
@@ -276,6 +295,12 @@ class DataPegawai extends BaseController
                     'required' => 'Status Kepegawaian Wajib Diisi'
                 ],
             ],
+            'clock_in_out_location' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Zona Waktu Wajib Diisi'
+                ],
+            ],
             'username' => [
                 'rules' => 'required',
                 'errors' => [
@@ -292,6 +317,7 @@ class DataPegawai extends BaseController
 
         if (!$this->validate($rules)) {
             $jabatanModel = new JabatanModel();
+            $divisiModel = new DivisiModel();
             $pegawaiModel = new PegawaiModel();
             $clockInOutLocationModel = new ClockInOutLocationModel();
             $data = [
@@ -299,6 +325,7 @@ class DataPegawai extends BaseController
                 'pegawai' => $pegawaiModel->detailPegawai($id),
                 'clock_in_out_location' => $clockInOutLocationModel->findAll(),
                 'jabatan' => $jabatanModel->orderBy('jabatan','ASC')->findAll(),
+                'divisi' => $divisiModel->orderBy('divisi','ASC')->findAll(),
                 'validation' => \Config\Services::validation(),
             ];
             
@@ -318,6 +345,7 @@ class DataPegawai extends BaseController
             }
 
             $pegawaiModel->update($id,[
+                'divisi' => $this->request->getPost('divisi'),
                 'jabatan' => $this->request->getPost('jabatan'),
                 'nip' => $this->request->getPost('nip'),
                 'nama' => $this->request->getPost('nama'),

@@ -17,6 +17,13 @@ $routes->get('admin/jabatan/edit/(:segment)', 'Admin\Jabatan::edit/$1', ['filter
 $routes->post('admin/jabatan/update/(:segment)', 'Admin\Jabatan::update/$1', ['filter' => 'adminfilter']);
 $routes->get('admin/jabatan/delete/(:segment)', 'Admin\Jabatan::delete/$1', ['filter' => 'adminfilter']);
 
+$routes->get('admin/divisi', 'Admin\Divisi::index', ['filter' => 'adminfilter']);
+$routes->get('admin/divisi/create', 'Admin\Divisi::create', ['filter' => 'adminfilter']);
+$routes->post('admin/divisi/store', 'Admin\Divisi::store', ['filter' => 'adminfilter']);
+$routes->get('admin/divisi/edit/(:segment)', 'Admin\Divisi::edit/$1', ['filter' => 'adminfilter']);
+$routes->post('admin/divisi/update/(:segment)', 'Admin\Divisi::update/$1', ['filter' => 'adminfilter']);
+$routes->get('admin/divisi/delete/(:segment)', 'Admin\Divisi::delete/$1', ['filter' => 'adminfilter']);
+
 $routes->get('admin/data_pegawai', 'Admin\DataPegawai::index', ['filter' => 'adminfilter']);
 $routes->get('admin/data_pegawai/create', 'Admin\DataPegawai::create', ['filter' => 'adminfilter']);
 $routes->post('admin/data_pegawai/store', 'Admin\DataPegawai::store', ['filter' => 'adminfilter']);

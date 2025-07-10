@@ -50,6 +50,18 @@
             </div>
     </div>
     <div class="input-style-1">
+    <label>Divisi</label>
+    <div class="col-sm-10">
+        <select name="divisi" class="form-control <?= ($validation->hasError('divisi')) ? 'is-invalid' : '' ?>">
+            <option value="">--Pilih Divisi--</option>
+            <?php foreach ($divisi as $div) : ?>
+                <option value="<?= $div['divisi'] ?>"><?= $div['divisi'] ?></option>
+                <?php endforeach ?>
+        </select>
+        <div class="invalid-feedback"><?= $validation->getError('divisi')?></div>
+        </div>
+    </div>
+    <div class="input-style-1">
     <label>Jabatan</label>
     <div class="col-sm-10">
         <select name="jabatan" class="form-control <?= ($validation->hasError('jabatan')) ? 'is-invalid' : '' ?>">
@@ -98,7 +110,7 @@
     <label>Zona waktu Absensi</label>
     <div class="col-sm-10">
         <select name="clock_in_out_location" class="form-control <?= ($validation->hasError('clock_in_out_location')) ? 'is-invalid' : '' ?>">
-            <option value="">--Pilih Jabatan--</option>
+            <option value="">--Zona Waktu--</option>
             <?php foreach ($clock_in_out_location as $clock) : ?>
                 <option value="<?= $clock['id'] ?>"><?= $clock['id'] ?></option>
                 <?php endforeach ?>

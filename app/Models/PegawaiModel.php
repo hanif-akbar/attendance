@@ -15,6 +15,7 @@ class PegawaiModel extends Model
         'tanggal_lahir',
         'alamat',
         'no_handphone',
+        'divisi',
         'jabatan',
         'role',
         'foto',

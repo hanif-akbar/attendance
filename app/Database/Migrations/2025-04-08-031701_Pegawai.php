@@ -35,6 +35,10 @@ class Pegawai extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => '20',
             ],
+            'divisi' => [
+                'type' => 'VARCHAR',
+                'constraint' => '50',
+            ],
             'jabatan' => [
                 'type' => 'VARCHAR',
                 'constraint' => '50',

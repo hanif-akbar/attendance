@@ -83,6 +83,7 @@ class Jabatan extends BaseController
             ]
         ];
 
+        $jabatanModel = new JabatanModel();
         if (!$this->validate($rules)) {
             $data = [
                 'title' => 'Edit Jabatan',
@@ -115,4 +116,5 @@ class Jabatan extends BaseController
             return redirect()->to(base_url('/admin/jabatan'));
        }
     }
+    
 }
