@@ -145,6 +145,8 @@
         <select name="role" class="form-control <?= ($validation->hasError('role')) ? 'is-invalid' : '' ?>">
             <option value="">--Pilih Role--</option>
             <option value="Pegawai" <?= set_value('role') == 'Pegawai' ? 'selected' : '' ?> >Pegawai</option>
+            <option value="Kepala_Bagian" <?= set_value('role') == 'Kepala_Bagian' ? 'selected' : '' ?> >Kepala Bagian</option>
+            <option value="Direktur" <?= set_value('role') == 'Direktur' ? 'selected' : '' ?> >Direktur</option>
             <option value="Admin" <?= set_value('role') == 'Admin' ? 'selected' : '' ?> >Admin</option>
         </select>
         <div class="invalid-feedback"><?= $validation->getError('role')?></div>

@@ -13,7 +13,7 @@ class Ketidakhadiran extends BaseController
         $ketidakhadiranModel = new KetidakhadiranModel();
         $data = [
             'title' => 'Data Ketidakhadiran',
-            'ketidakhadiran' => $ketidakhadiranModel->findAll(),
+            'ketidakhadiran' => $ketidakhadiranModel->getAllWithPegawai(),
         ];
 
         return view('admin/ketidakhadiran/data_ketidakhadiran', $data);

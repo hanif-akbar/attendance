@@ -9,75 +9,101 @@ $routes->get('/', 'Login::index');
 $routes->post('login', 'Login::login_action');
 $routes->get('logout', 'Login::logout');
 
-$routes->get('admin/dashboard', 'Admin\Home::index', ['filter' => 'adminfilter']);
-$routes->get('admin/jabatan', 'Admin\Jabatan::index', ['filter' => 'adminfilter']);
-$routes->get('admin/jabatan/create', 'Admin\Jabatan::create', ['filter' => 'adminfilter']);
-$routes->post('admin/jabatan/store', 'Admin\Jabatan::store', ['filter' => 'adminfilter']);
-$routes->get('admin/jabatan/edit/(:segment)', 'Admin\Jabatan::edit/$1', ['filter' => 'adminfilter']);
-$routes->post('admin/jabatan/update/(:segment)', 'Admin\Jabatan::update/$1', ['filter' => 'adminfilter']);
-$routes->get('admin/jabatan/delete/(:segment)', 'Admin\Jabatan::delete/$1', ['filter' => 'adminfilter']);
+$routes->group('admin', ['filter' => 'adminfilter'], function($routes) {
+    $routes->get('dashboard', 'Admin\Home::index');
+    $routes->get('jabatan', 'Admin\Jabatan::index');
+    $routes->get('jabatan/create', 'Admin\Jabatan::create');
+    $routes->post('jabatan/store', 'Admin\Jabatan::store');
+    $routes->get('jabatan/edit/(:segment)', 'Admin\Jabatan::edit/$1');
+    $routes->post('jabatan/update/(:segment)', 'Admin\Jabatan::update/$1');
+    $routes->get('jabatan/delete/(:segment)', 'Admin\Jabatan::delete/$1');
 
-$routes->get('admin/divisi', 'Admin\Divisi::index', ['filter' => 'adminfilter']);
-$routes->get('admin/divisi/create', 'Admin\Divisi::create', ['filter' => 'adminfilter']);
-$routes->post('admin/divisi/store', 'Admin\Divisi::store', ['filter' => 'adminfilter']);
-$routes->get('admin/divisi/edit/(:segment)', 'Admin\Divisi::edit/$1', ['filter' => 'adminfilter']);
-$routes->post('admin/divisi/update/(:segment)', 'Admin\Divisi::update/$1', ['filter' => 'adminfilter']);
-$routes->get('admin/divisi/delete/(:segment)', 'Admin\Divisi::delete/$1', ['filter' => 'adminfilter']);
+    $routes->get('divisi', 'Admin\Divisi::index');
+    $routes->get('divisi/create', 'Admin\Divisi::create');
+    $routes->post('divisi/store', 'Admin\Divisi::store');
+    $routes->get('divisi/edit/(:segment)', 'Admin\Divisi::edit/$1');
+    $routes->post('divisi/update/(:segment)', 'Admin\Divisi::update/$1');
+    $routes->get('divisi/delete/(:segment)', 'Admin\Divisi::delete/$1');
 
-$routes->get('admin/data_pegawai', 'Admin\DataPegawai::index', ['filter' => 'adminfilter']);
-$routes->get('admin/data_pegawai/create', 'Admin\DataPegawai::create', ['filter' => 'adminfilter']);
-$routes->post('admin/data_pegawai/store', 'Admin\DataPegawai::store', ['filter' => 'adminfilter']);
-$routes->get('admin/data_pegawai/edit/(:segment)', 'Admin\DataPegawai::edit/$1', ['filter' => 'adminfilter']);
-$routes->post('admin/data_pegawai/update/(:segment)', 'Admin\DataPegawai::update/$1', ['filter' => 'adminfilter']);
-$routes->get('admin/data_pegawai/detail/(:segment)', 'Admin\DataPegawai::detail/$1', ['filter' => 'adminfilter']);
-$routes->get('admin/data_pegawai/delete/(:segment)', 'Admin\DataPegawai::delete/$1', ['filter' => 'adminfilter']);
+    $routes->get('data_pegawai', 'Admin\DataPegawai::index');
+    $routes->get('data_pegawai/create', 'Admin\DataPegawai::create');
+    $routes->post('data_pegawai/store', 'Admin\DataPegawai::store');
+    $routes->get('data_pegawai/edit/(:segment)', 'Admin\DataPegawai::edit/$1');
+    $routes->post('data_pegawai/update/(:segment)', 'Admin\DataPegawai::update/$1');
+    $routes->get('data_pegawai/detail/(:segment)', 'Admin\DataPegawai::detail/$1');
+    $routes->get('data_pegawai/delete/(:segment)', 'Admin\DataPegawai::delete/$1');
 
-$routes->get('admin/rekap_harian', 'Admin\RekapPresensi::rekap_harian', ['filter' => 'adminfilter']);
-$routes->get('admin/rekap_mingguan', 'Admin\RekapPresensi::rekap_mingguan', ['filter' => 'adminfilter']);
-$routes->get('admin/rekap_bulanan', 'Admin\RekapPresensi::rekap_bulanan', ['filter' => 'adminfilter']);
+    $routes->get('rekap_harian', 'Admin\RekapPresensi::rekap_harian');
+    $routes->get('rekap_mingguan', 'Admin\RekapPresensi::rekap_mingguan');
+    $routes->get('rekap_bulanan', 'Admin\RekapPresensi::rekap_bulanan');
 
-$routes->get('admin/ketidakhadiran', 'Admin\Ketidakhadiran::index', ['filter' => 'adminfilter']);
-$routes->get('admin/approved_ketidakhadiran/(:segment)', 'Admin\Ketidakhadiran::approved/$1', ['filter' => 'adminfilter']);
-$routes->get('admin/rejected_ketidakhadiran/(:segment)', 'Admin\Ketidakhadiran::rejected/$1', ['filter' => 'adminfilter']);
+    $routes->get('ketidakhadiran', 'Admin\Ketidakhadiran::index');
+    $routes->get('approved_ketidakhadiran/(:segment)', 'Admin\Ketidakhadiran::approved/$1');
+    $routes->get('rejected_ketidakhadiran/(:segment)', 'Admin\Ketidakhadiran::rejected/$1');
 
-// Routes untuk Verifikasi Ketidakhadiran
-$routes->get('admin/verifikasi-ketidakhadiran', 'Admin\VerifikasiKetidakhadiran::index', ['filter' => 'adminfilter']);
-$routes->get('admin/verifikasi-ketidakhadiran/detail/(:segment)', 'Admin\VerifikasiKetidakhadiran::detail/$1', ['filter' => 'adminfilter']);
-$routes->post('admin/verifikasi-ketidakhadiran/verifikasi/(:segment)', 'Admin\VerifikasiKetidakhadiran::verifikasi/$1', ['filter' => 'adminfilter']);
+    $routes->get('role_bawahan_ke_atasan', 'Admin\RoleAtasanBawahan::index');
+});
 
-// Routes untuk Kelola Kepala Bagian
-$routes->get('admin/kepala-bagian', 'Admin\VerifikasiKetidakhadiran::kepalaBagian', ['filter' => 'adminfilter']);
-$routes->post('admin/kepala-bagian/set', 'Admin\VerifikasiKetidakhadiran::setKepalaBagian', ['filter' => 'adminfilter']);
-$routes->get('admin/kepala-bagian/remove/(:segment)', 'Admin\VerifikasiKetidakhadiran::removeKepalaBagian/$1', ['filter' => 'adminfilter']);
+$routes->group('pegawai', ['filter' => 'pegawaifilter'], function($routes) {
+    $routes->get('dashboard', 'Pegawai\Home::index');
+    $routes->post('presensi_masuk', 'Pegawai\Home::presensi_masuk');
+    $routes->post('presensi_masuk_aksi', 'Pegawai\Home::presensi_masuk_aksi');
+    $routes->post('presensi_keluar/(:segment)', 'Pegawai\Home::presensi_keluar/$1');
+    $routes->post('presensi_keluar_aksi/(:segment)', 'Pegawai\Home::presensi_keluar_aksi/$1');
 
-// Routes untuk Kepala Bagian
-$routes->get('kepala-bagian/verifikasi-ketidakhadiran', 'Admin\VerifikasiKetidakhadiran::index', ['filter' => 'kepalabagianfilter']);
-$routes->get('kepala-bagian/verifikasi-ketidakhadiran/detail/(:segment)', 'Admin\VerifikasiKetidakhadiran::detail/$1', ['filter' => 'kepalabagianfilter']);
-$routes->post('kepala-bagian/verifikasi-ketidakhadiran/verifikasi/(:segment)', 'Admin\VerifikasiKetidakhadiran::verifikasi/$1', ['filter' => 'kepalabagianfilter']);
+    $routes->get('ubah_password', 'Login::ubahPassword');
+    $routes->post('ubah_password_auth', 'Login::ubahPasswordAuth');
 
-// Routes untuk Direktur  
-$routes->get('direktur/verifikasi-ketidakhadiran', 'Admin\VerifikasiKetidakhadiran::index', ['filter' => 'direkturfilter']);
-$routes->get('direktur/verifikasi-ketidakhadiran/detail/(:segment)', 'Admin\VerifikasiKetidakhadiran::detail/$1', ['filter' => 'direkturfilter']);
-$routes->post('direktur/verifikasi-ketidakhadiran/verifikasi/(:segment)', 'Admin\VerifikasiKetidakhadiran::verifikasi/$1', ['filter' => 'direkturfilter']);
+    $routes->get('ubah_username', 'Login::ubahUsername');
+    $routes->post('ubah_username_auth', 'Login::ubahUsernameAuth');
 
-$routes->get('pegawai/dashboard', 'Pegawai\Home::index',['filter' => 'pegawaifilter']);
-$routes->post('pegawai/presensi_masuk', 'Pegawai\Home::presensi_masuk',['filter' => 'pegawaifilter']);
-$routes->post('pegawai/presensi_masuk_aksi', 'Pegawai\Home::presensi_masuk_aksi',['filter' => 'pegawaifilter']);
-$routes->post('pegawai/presensi_keluar/(:segment)', 'Pegawai\Home::presensi_keluar/$1',['filter' => 'pegawaifilter']);
-$routes->post('pegawai/presensi_keluar_aksi/(:segment)', 'Pegawai\Home::presensi_keluar_aksi/$1',['filter' => 'pegawaifilter']);
+    $routes->get('rekap_presensi', 'Pegawai\RekapPresensi::index');
 
-$routes->get('pegawai/ubah_password', 'Login::ubahPassword', ['filter' => 'pegawaifilter']);
-$routes->post('pegawai/ubah_password_auth', 'Login::ubahPasswordAuth', ['filter' => 'pegawaifilter']);
+    // untuk keperluan rekap ketidakhadiran
+    $routes->get('ketidakhadiran', 'Pegawai\Ketidakhadiran::index');
+    $routes->get('ketidakhadiran/create', 'Pegawai\Ketidakhadiran::create');
+    $routes->post('ketidakhadiran/store', 'Pegawai\Ketidakhadiran::store');
+    $routes->get('ketidakhadiran/edit/(:segment)', 'Pegawai\Ketidakhadiran::edit/$1');
+    $routes->post('ketidakhadiran/update/(:segment)', 'Pegawai\Ketidakhadiran::update/$1');
+    $routes->get('ketidakhadiran/delete/(:segment)', 'Pegawai\Ketidakhadiran::delete/$1');
+});
 
-$routes->get('pegawai/ubah_username', 'Login::ubahUsername', ['filter' => 'pegawaifilter']);
-$routes->post('pegawai/ubah_username_auth', 'Login::ubahUsernameAuth', ['filter' => 'pegawaifilter']);
+$routes->group('kepala_bagian', ['filter' => 'kepalabagianfilter'], function($routes) {
+    $routes->get('dashboard', 'KepalaBagian\Home::index');
+    $routes->post('presensi_masuk', 'KepalaBagian\Home::presensi_masuk');
+    $routes->post('presensi_masuk_aksi', 'KepalaBagian\Home::presensi_masuk_aksi');
+    $routes->post('presensi_keluar/(:segment)', 'KepalaBagian\Home::presensi_keluar/$1');
+    $routes->post('presensi_keluar_aksi/(:segment)', 'KepalaBagian\Home::presensi_keluar_aksi/$1');
 
-$routes->get('pegawai/rekap_presensi', 'Pegawai\RekapPresensi::index', ['filter' => 'pegawaifilter']);
+    $routes->get('ubah_password', 'Login::ubahPasswordKepalaBagian');
+    $routes->post('ubah_password_auth', 'Login::ubahPasswordAuthKepalaBagian');
 
-// untuk keperluan rekap ketidakhadiran
-$routes->get('pegawai/ketidakhadiran', 'Pegawai\Ketidakhadiran::index', ['filter' => 'pegawaifilter']);
-$routes->get('pegawai/ketidakhadiran/create', 'Pegawai\Ketidakhadiran::create', ['filter' => 'pegawaifilter']);
-$routes->post('pegawai/ketidakhadiran/store', 'Pegawai\Ketidakhadiran::store', ['filter' => 'pegawaifilter']);
-$routes->get('pegawai/ketidakhadiran/edit/(:segment)', 'Pegawai\Ketidakhadiran::edit/$1', ['filter' => 'pegawaifilter']);
-$routes->post('pegawai/ketidakhadiran/update/(:segment)', 'Pegawai\Ketidakhadiran::update/$1', ['filter' => 'pegawaifilter']);
-$routes->get('pegawai/ketidakhadiran/delete/(:segment)', 'Pegawai\Ketidakhadiran::delete/$1', ['filter' => 'pegawaifilter']);
+    $routes->get('ubah_username', 'Login::ubahUsernameKepalaBagian');
+    $routes->post('ubah_username_auth', 'Login::ubahUsernameAuthKepalaBagian');
+
+    $routes->get('rekap_presensi', 'KepalaBagian\RekapPresensi::index');
+
+    // untuk keperluan rekap ketidakhadiran
+    $routes->get('ketidakhadiran', 'KepalaBagian\Ketidakhadiran::index');
+    $routes->get('ketidakhadiran/create', 'KepalaBagian\Ketidakhadiran::create');
+    $routes->post('ketidakhadiran/store', 'KepalaBagian\Ketidakhadiran::store');
+    $routes->get('ketidakhadiran/edit/(:segment)', 'KepalaBagian\Ketidakhadiran::edit/$1');
+    $routes->post('ketidakhadiran/update/(:segment)', 'KepalaBagian\Ketidakhadiran::update/$1');
+    $routes->get('ketidakhadiran/delete/(:segment)', 'KepalaBagian\Ketidakhadiran::delete/$1');
+});
+
+$routes->group('direktur', ['filter' => 'direkturfilter'], function($routes) {
+    $routes->get('dashboard', 'Direktur\Home::index');
+    $routes->post('presensi_masuk', 'Direktur\Home::presensi_masuk');
+    $routes->post('presensi_masuk_aksi', 'Direktur\Home::presensi_masuk_aksi');
+    $routes->post('presensi_keluar/(:segment)', 'Direktur\Home::presensi_keluar/$1');
+    $routes->post('presensi_keluar_aksi/(:segment)', 'Direktur\Home::presensi_keluar_aksi/$1');
+
+    $routes->get('ubah_password', 'Login::ubahPasswordDirektur');
+    $routes->post('ubah_password_auth', 'Login::ubahPasswordAuthDirektur');
+
+    $routes->get('ubah_username', 'Login::ubahUsernameDirektur');
+    $routes->post('ubah_username_auth', 'Login::ubahUsernameAuthDirektur');
+
+    $routes->get('rekap_presensi', 'Direktur\RekapPresensi::index');
+});

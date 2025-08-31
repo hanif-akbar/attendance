@@ -10,14 +10,20 @@ class KepalaBagianFilter implements FilterInterface
 {
     public function before(RequestInterface $request, $arguments = null)
     {
-        if (!session()->get('logged_in') || session()->get('role') !== 'kepala_bagian') {
+        if(!session()->get('logged_in')) {
+            session()->setFlashdata('error', 'Silahkan login terlebih dahulu');
+            return redirect()->to('/');
+        }
+
+        if(session()->get('role') != 'Kepala Bagian') {
             session()->setFlashdata('error', 'Anda tidak memiliki akses ke halaman ini');
-            return redirect()->to(base_url('/'))->with('error', 'Akses ditolak');
+            return redirect()->to('/');
         }
     }
 
+    
     public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
     {
-        // Do something here
+        //
     }
 }

@@ -146,8 +146,10 @@
     <div class="col-sm-10">
         <select name="role" class="form-control <?= ($validation->hasError('role')) ? 'is-invalid' : '' ?>">
             <option value="">--Pilih Role--</option>
-            <option value="Admin" <?= ($pegawai['role'] == 'Admin') ? 'selected' : '' ?>>Admin</option>
             <option value="Pegawai" <?= ($pegawai['role'] == 'Pegawai') ? 'selected' : '' ?>>Pegawai</option>
+            <option value="Kepala_Bagian" <?= ($pegawai['role'] == 'Kepala_Bagian') ? 'selected' : '' ?>>Kepala Bagian</option>
+            <option value="Direktur" <?= ($pegawai['role'] == 'Direktur') ? 'selected' : '' ?>>Direktur</option>
+            <option value="Admin" <?= ($pegawai['role'] == 'Admin') ? 'selected' : '' ?>>Admin</option>
         </select>
         <div class="invalid-feedback"><?= $validation->getError('role')?></div>
         </div>

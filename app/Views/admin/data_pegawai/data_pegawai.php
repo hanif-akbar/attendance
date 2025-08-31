@@ -246,9 +246,7 @@
                 <div class="col-md-6">
                     <nav aria-label="Pagination Navigation" class="d-flex justify-content-md-end justify-content-center">
                         <div class="pagination-wrapper">
-                            <?php if (isset($pager)): ?>
-                                <?= $pager->links() ?>
-                            <?php endif; ?>
+                            <?= $pager->links('default', 'bootstrap_pagination') ?>
                         </div>
                     </nav>
                 </div>

@@ -12,13 +12,10 @@
         <tr>
             <th>No</th>
             <th>Tanggal</th>
-            <th>Jenis</th>
             <th>Keterangan</th>
             <th>Deskripsi</th>
             <th>File</th>
-            <th>Status Kepala Bagian</th>
-            <th>Status Direktur</th>
-            <th>Status Akhir</th>
+            <th>Status Verivikasi</th>
             <th>Aksi</th>
         </tr>
     </thead>
@@ -30,46 +27,16 @@
                   <?= $no++ ?>  
                 </td>
                 <td><?= $ketidakhadiran['tanggal'] ?></td>
-                <td>
-                    <span class="badge bg-info"><?= ucfirst($ketidakhadiran['jenis_ketidakhadiran'] ?? 'izin') ?></span>
-                </td>
                 <td><?= $ketidakhadiran['keterangan'] ?></td>
                 <td><?= $ketidakhadiran['deskripsi'] ?></td>
                 <td>
                     <?php if (!empty($ketidakhadiran['file'])): ?>
                         <a href="<?= base_url('ketidakhadiran/download/' . $ketidakhadiran['file']) ?>" class="badge bg-primary">Download</a>
-                        <?php else: ?>
-                            <span class="badge bg-secondary">No File</span>
-                            <?php endif; ?>
-                        </td>
-                        <td>
-                            <?php 
-                            $statusKepala = $ketidakhadiran['status_verifikasi_kepala'] ?? 'pending';
-                            $badgeClass = $statusKepala == 'approved' ? 'bg-success' : ($statusKepala == 'rejected' ? 'bg-danger' : 'bg-warning');
-                            ?>
-                            <span class="badge <?= $badgeClass ?>"><?= ucfirst($statusKepala) ?></span>
-                            <?php if ($ketidakhadiran['verifikasi_kepala_at']): ?>
-                                <br><small class="text-muted"><?= date('d/m/Y H:i', strtotime($ketidakhadiran['verifikasi_kepala_at'])) ?></small>
-                            <?php endif; ?>
-                        </td>
-                        <td>
-                            <?php 
-                            $statusDirektur = $ketidakhadiran['status_verifikasi_direktur'] ?? 'pending';
-                            $badgeClass = $statusDirektur == 'approved' ? 'bg-success' : ($statusDirektur == 'rejected' ? 'bg-danger' : 'bg-warning');
-                            ?>
-                            <span class="badge <?= $badgeClass ?>"><?= ucfirst($statusDirektur) ?></span>
-                            <?php if ($ketidakhadiran['verifikasi_direktur_at']): ?>
-                                <br><small class="text-muted"><?= date('d/m/Y H:i', strtotime($ketidakhadiran['verifikasi_direktur_at'])) ?></small>
-                            <?php endif; ?>
-                        </td>
-                        <td>
-                            <?php 
-                            $statusAkhir = $ketidakhadiran['sttatus_pengajuan'];
-                            $badgeClass = strpos(strtolower($statusAkhir), 'disetujui') !== false ? 'bg-success' : 
-                                         (strpos(strtolower($statusAkhir), 'ditolak') !== false ? 'bg-danger' : 'bg-warning');
-                            ?>
-                            <span class="badge <?= $badgeClass ?>"><?= $statusAkhir ?></span>
-                        </td>
+                    <?php else: ?>
+                        <span class="badge bg-secondary">No File</span>
+                    <?php endif; ?>
+                </td>
+                <td><?= $ketidakhadiran['sttatus_pengajuan'] ?></td>
                 <td>
                     <a href="<?= base_url('pegawai/ketidakhadiran/edit/' . $ketidakhadiran['id']) ?>" class="badge bg-primary">Edit</a>
                     <a href="<?= base_url('pegawai/ketidakhadiran/delete/' . $ketidakhadiran['id']) ?>" class="badge bg-danger tombol-hapus">Delete</a>
@@ -78,7 +45,7 @@
             <?php endforeach; ?>
             <?php else: ?>
                 <tr>
-                        <td colspan="10" class="text-center py-7">Belum ada data Pengajuan.</td>
+                        <td colspan="7" class="text-center py-7">Belum ada data Pengajuan.</td>
                 </tr>
             <?php endif; ?>
         </tbody>

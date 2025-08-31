@@ -4,11 +4,14 @@
     <thead>
         <tr>
             <th>No</th>
+            <th>ID Pegawai</th>
+            <th>Nama Pegawai</th>
             <th>Tanggal</th>
             <th>Keterangan</th>
             <th>Deskripsi</th>
             <th>File</th>
-            <th>Status Verivikasi</th>
+            <th>Status Verifikasi Atasan</th>
+            <th>Status Verivikasi HR</th>
             <th>Aksi</th>
         </tr>
     </thead>
@@ -19,16 +22,19 @@
                 <td>
                   <?= $no++ ?>  
                 </td>
+                <td><?= $ketidakhadiran['nip'] ?></td>
+                <td><?= $ketidakhadiran['nama_pegawai'] ?></td>
                 <td><?= $ketidakhadiran['tanggal'] ?></td>
                 <td><?= $ketidakhadiran['keterangan'] ?></td>
                 <td><?= $ketidakhadiran['deskripsi'] ?></td>
                 <td>
                     <?php if (!empty($ketidakhadiran['file'])): ?>
                         <a href="<?= base_url('ketidakhadiran/download/' . $ketidakhadiran['file']) ?>" class="badge bg-primary">Download</a>
-                    <?php else: ?>
-                        <span class="badge bg-secondary">No File</span>
-                    <?php endif; ?>
-                </td>
+                        <?php else: ?>
+                            <span class="badge bg-secondary">No File</span>
+                            <?php endif; ?>
+                        </td>
+                <td></td>
                 <td><?php if ($ketidakhadiran['sttatus_pengajuan'] == "Pending") :?>
                     <span class="badge bg-warning">Pending</span>
                 <?php elseif ($ketidakhadiran['sttatus_pengajuan'] == "Disetujui") : ?>

@@ -18,7 +18,7 @@ class Ketidakhadiran extends BaseController
         $id_pegawai = session()->get('id_pegawai');
         $data = [
             'title' => 'Ketidakhadiran',
-            'ketidakhadiran' => $ketidahadiranModel->getKetidakhadiranWithPegawai($id_pegawai)
+            'ketidakhadiran' => $ketidahadiranModel->where('id_pegawai', $id_pegawai)->findAll()
         ];
 
         return view('pegawai/ketidakhadiran/data_ketidakhadiran', $data);
@@ -40,12 +40,6 @@ class Ketidakhadiran extends BaseController
                 'rules' => 'required',
                 'errors' => [
                     'required' => 'Keterangan Wajib Diisi'
-                ],
-            ],
-            'jenis_ketidakhadiran' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => 'Jenis Ketidakhadiran Wajib Diisi'
                 ],
             ],
             'tanggal' => [
@@ -93,12 +87,9 @@ class Ketidakhadiran extends BaseController
             $ketidahadiranModel->insert([
                 'id_pegawai' => $this->request->getPost('id_pegawai'),
                 'keterangan' => $this->request->getPost('keterangan'),
-                'jenis_ketidakhadiran' => $this->request->getPost('jenis_ketidakhadiran'),
                 'tanggal' => $this->request->getPost('tanggal'),
                 'deskripsi' => $this->request->getPost('deskripsi'),
                 'sttatus_pengajuan' => 'Pending',
-                'status_verifikasi_kepala' => 'pending',
-                'status_verifikasi_direktur' => 'pending',
                 'file' => $nama_file,
             ]);
             

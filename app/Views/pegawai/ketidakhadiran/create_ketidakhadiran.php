@@ -16,33 +16,17 @@
                         
                         <input type="hidden" value="<?= session()->get('id_pegawai') ?>" name="id_pegawai">
                         
-                        <!-- Jenis Ketidakhadiran -->
-                        <div class="mb-3">
-                            <label for="jenis_ketidakhadiran" class="form-label">
-                                <i class="fas fa-list-alt me-1"></i>
-                                Jenis Ketidakhadiran <span class="text-danger">*</span>
-                            </label>
-                            <select name="jenis_ketidakhadiran" id="jenis_ketidakhadiran" class="form-select <?= ($validation->hasError('jenis_ketidakhadiran')) ? 'is-invalid' : '' ?>">
-                                <option value="">--Pilih Jenis--</option>
-                                <option value="sakit" <?= set_value('jenis_ketidakhadiran') == 'sakit' ? 'selected' : '' ?>>Sakit</option>
-                                <option value="izin" <?= set_value('jenis_ketidakhadiran') == 'izin' ? 'selected' : '' ?>>Izin</option>
-                                <option value="cuti" <?= set_value('jenis_ketidakhadiran') == 'cuti' ? 'selected' : '' ?>>Cuti</option>
-                            </select>
-                            <div class="invalid-feedback"><?= $validation->getError('jenis_ketidakhadiran')?></div>
-                        </div>
-
                         <!-- Keterangan -->
                         <div class="mb-3">
                             <label for="keterangan" class="form-label">
                                 <i class="fas fa-info-circle me-1"></i>
                                 Keterangan <span class="text-danger">*</span>
                             </label>
-                            <input type="text" 
-                                   id="keterangan" 
-                                   name="keterangan" 
-                                   class="form-control <?= ($validation->hasError('keterangan')) ? 'is-invalid' : '' ?>" 
-                                   value="<?= set_value('keterangan') ?>"
-                                   placeholder="Contoh: Demam tinggi, Keperluan keluarga, dll">
+                            <select name="keterangan" id="keterangan" class="form-select <?= ($validation->hasError('keterangan')) ? 'is-invalid' : '' ?>">
+                                <option value="">--Pilih Keterangan--</option>
+                                <option value="Izin" <?= set_value('keterangan') == 'Izin' ? 'selected' : '' ?>>Izin</option>
+                                <option value="Sakit" <?= set_value('keterangan') == 'Sakit' ? 'selected' : '' ?>>Sakit</option>
+                            </select>
                             <div class="invalid-feedback"><?= $validation->getError('keterangan')?></div>
                         </div>
                         

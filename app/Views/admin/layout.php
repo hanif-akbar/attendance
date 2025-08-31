@@ -50,7 +50,7 @@
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="https://www.riaputrametalindo.com/" class="logo d-flex align-items-center">
+      <a href="<?= base_url('admin/dashboard') ?>" class="logo d-flex align-items-center">
         <img src="<?= base_url('assets/img/logo-rpm.png') ?>" alt="">
         <span class="d-none d-lg-block">PT.RIAPUTRA METALINDO</span>
       </a>
@@ -191,14 +191,15 @@
         <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
             <a href="<?= base_url('admin/ketidakhadiran') ?>">
-              <i class="bi bi-circle"></i><span>Sakit & Izin</span>
+              <i class="bi bi-circle"></i><span>Sakit,Izin & Cuti</span>
             </a>
           </li>
-          <!-- <li>
-            <a href="tables-data.html">
-              <i class="bi bi-circle"></i><span>Cuti</span>
+          <li>
+            <!-- role untuk mengatur verifikasi bawahan ke atasan untuk cuti izin sakit -->
+            <a href="<?= base_url('admin/role_bawahan_ke_atasan') ?>">
+              <i class="bi bi-circle"></i><span>Role Bawahan ke Atasan</span>
             </a>
-          </li> -->
+          </li>
         </ul>
       </li>
       <!-- End Tables Nav -->
