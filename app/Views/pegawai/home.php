@@ -18,6 +18,16 @@
 
 </style>
 
+
+    <div class="col-12 text-center">
+        <h5>Absensi Hanya Bisa Jika Maps Sudah di Muat hingga Muncul di Tampilan</h5>
+        <h6>Bila Maps Tidak Muncul Cukup Lama, Silakan Coba Refresh Browser Anda</h6>
+    </div> 
+
+        <!-- <div class="row mb-4">
+            
+        </div> -->
+    
 <div class="row">
     <div class="col-md-2"></div>
     <div class="col-md-4">
@@ -106,9 +116,10 @@
                 </form>
                 </div>
             <?php endif; ?>
-        </div></div>
+        </div>
+    </div>
     <div class="col-md-2"></div>
-    <div class="col-md-8" id="map"></div>
+    <div class="col-md-8 mx-auto" id="map"></div>
 </div>
 
 

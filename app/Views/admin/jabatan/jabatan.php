@@ -1,32 +1,47 @@
 <?= $this->extend('admin/layout.php')?>
 <?= $this->section('content')?>
 
-<a href="<?= base_url('admin/jabatan/create')?>" class="btn btn-primary"><i class="bi bi-plus-circle"></i>Tambah Data</a>
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h4 class="mb-0">Daftar Jabatan</h4>
+    <a href="<?= base_url('admin/jabatan/create') ?>" class="btn btn-primary">
+        <i class="bi bi-plus-circle"></i> Tambah Data
+    </a>
+</div>
 
-<table class="table table-striped" id ="datatables">
-    <thead>
-        <tr>
-            <th>No</th>
-            <th>Nama Jabatan</th>
-            <th>Aksi</th>
-        </tr>
-    </thead>
-    <?php $no = 1; foreach ($jabatan as $jab) : ?>
-        <tbody>
+<div class="table-responsive">
+    <table class="table table-striped table-hover align-middle" id="datatables" style="border: 1px solid #dee2e6;">
+        <thead class="table-dark">
             <tr>
-                <td>
-                    <?= $no++ ?>
-                </td>
-                <td>
-                    <?= $jab['jabatan'] ?>
-                </td>
-                <td>
-                    <a href="<?= base_url('admin/jabatan/edit/'.$jab['id'])?>" class="badge bg-primary">Edit Data</a>
-                    <a href="<?= base_url('admin/jabatan/delete/'.$jab['id'])?>" class="badge bg-danger tombol-hapus">Delete Data</a>
-                </td>
+                <th scope="col" style="width: 5%;">No</th>
+                <th scope="col">Nama Jabatan</th>
+                <th scope="col" style="width: 20%;">Aksi</th>
             </tr>
+        </thead>
+        <tbody>
+            <?php $no = 1; foreach ($jabatan as $jab) : ?>
+                <tr style="transition: background-color 0.3s;">
+                    <td class="text-center">
+                        <?= $no++ ?>
+                    </td>
+                    <td>
+                        <?= esc($jab['jabatan']) ?>
+                    </td>
+                    <td>
+                        <div class="btn-group" role="group">
+                            <a href="<?= base_url('admin/jabatan/edit/'.$jab['id']) ?>" 
+                               class="btn btn-sm btn-warning" title="Edit">
+                                <i class="bi bi-pencil"></i> Edit
+                            </a>
+                            <a href="<?= base_url('admin/jabatan/delete/'.$jab['id']) ?>" 
+                               class="btn btn-sm btn-danger tombol-hapus" title="Hapus">
+                                <i class="bi bi-trash"></i> Hapus
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            <?php endforeach ?>
         </tbody>
-        <?php endforeach ?>
-</table>
+    </table>
+</div>
 
 <?= $this->endSection()?>

@@ -35,7 +35,7 @@ class PresensiModel extends Model
     public function rekap_mingguan(){
         $db      = \Config\Database::connect();
         $builder = $db->table('presensi');
-        $builder->select('presensi.*, pegawai.nama, clock_in_out_location.jam_masuk as jam_masuk_office');
+        $builder->select('presensi.*, pegawai.nama, pegawai.nip, clock_in_out_location.jam_masuk as jam_masuk_office');
         $builder->join('pegawai', 'pegawai.id = presensi.id_pegawai');
         $builder->join('clock_in_out_location','clock_in_out_location.id = pegawai.clock_in_out_location');
         $builder->where('presensi.tanggal_masuk', date('Y-m-d'));
@@ -45,7 +45,7 @@ class PresensiModel extends Model
     public function rekap_harian_filter($filter_tanggal){
         $db      = \Config\Database::connect();
         $builder = $db->table('presensi');
-        $builder->select('presensi.*, pegawai.nama, clock_in_out_location.jam_masuk as jam_masuk_office');
+        $builder->select('presensi.*, pegawai.nama, pegawai.nip, clock_in_out_location.jam_masuk as jam_masuk_office');
         $builder->join('pegawai', 'pegawai.id = presensi.id_pegawai');
         $builder->join('clock_in_out_location','clock_in_out_location.id = pegawai.clock_in_out_location');
         $builder->where('presensi.tanggal_masuk', $filter_tanggal);
@@ -53,11 +53,11 @@ class PresensiModel extends Model
     }
 
     public function rekap_mingguan_filter($filter_mingguan){
-    $db      = \Config\Database::connect();
-    $builder = $db->table('presensi');
-    $builder->select('presensi.*, pegawai.nama, clock_in_out_location.jam_masuk as jam_masuk_office');
-    $builder->join('pegawai', 'pegawai.id = presensi.id_pegawai');
-    $builder->join('clock_in_out_location','clock_in_out_location.id = pegawai.clock_in_out_location');
+        $db      = \Config\Database::connect();
+        $builder = $db->table('presensi');
+        $builder->select('presensi.*, pegawai.nama, pegawai.nip, clock_in_out_location.jam_masuk as jam_masuk_office');
+        $builder->join('pegawai', 'pegawai.id = presensi.id_pegawai');
+        $builder->join('clock_in_out_location','clock_in_out_location.id = pegawai.clock_in_out_location');
 
     if (!empty($filter_mingguan)) {
         // Format input: 2025-W21
@@ -99,7 +99,7 @@ class PresensiModel extends Model
     public function rekap_bulanan_filter($filter_bulan){
         $db      = \Config\Database::connect();
         $builder = $db->table('presensi');
-        $builder->select('presensi.*, pegawai.nama, clock_in_out_location.jam_masuk as jam_masuk_office');
+        $builder->select('presensi.*, pegawai.nama, pegawai.nip, clock_in_out_location.jam_masuk as jam_masuk_office');
         $builder->join('pegawai', 'pegawai.id = presensi.id_pegawai');
         $builder->join('clock_in_out_location','clock_in_out_location.id = pegawai.clock_in_out_location');
         // $builder->where('MONTH(presensi.tanggal_masuk)', date('m'));

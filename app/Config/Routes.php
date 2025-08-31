@@ -36,6 +36,30 @@ $routes->get('admin/rekap_harian', 'Admin\RekapPresensi::rekap_harian', ['filter
 $routes->get('admin/rekap_mingguan', 'Admin\RekapPresensi::rekap_mingguan', ['filter' => 'adminfilter']);
 $routes->get('admin/rekap_bulanan', 'Admin\RekapPresensi::rekap_bulanan', ['filter' => 'adminfilter']);
 
+$routes->get('admin/ketidakhadiran', 'Admin\Ketidakhadiran::index', ['filter' => 'adminfilter']);
+$routes->get('admin/approved_ketidakhadiran/(:segment)', 'Admin\Ketidakhadiran::approved/$1', ['filter' => 'adminfilter']);
+$routes->get('admin/rejected_ketidakhadiran/(:segment)', 'Admin\Ketidakhadiran::rejected/$1', ['filter' => 'adminfilter']);
+
+// Routes untuk Verifikasi Ketidakhadiran
+$routes->get('admin/verifikasi-ketidakhadiran', 'Admin\VerifikasiKetidakhadiran::index', ['filter' => 'adminfilter']);
+$routes->get('admin/verifikasi-ketidakhadiran/detail/(:segment)', 'Admin\VerifikasiKetidakhadiran::detail/$1', ['filter' => 'adminfilter']);
+$routes->post('admin/verifikasi-ketidakhadiran/verifikasi/(:segment)', 'Admin\VerifikasiKetidakhadiran::verifikasi/$1', ['filter' => 'adminfilter']);
+
+// Routes untuk Kelola Kepala Bagian
+$routes->get('admin/kepala-bagian', 'Admin\VerifikasiKetidakhadiran::kepalaBagian', ['filter' => 'adminfilter']);
+$routes->post('admin/kepala-bagian/set', 'Admin\VerifikasiKetidakhadiran::setKepalaBagian', ['filter' => 'adminfilter']);
+$routes->get('admin/kepala-bagian/remove/(:segment)', 'Admin\VerifikasiKetidakhadiran::removeKepalaBagian/$1', ['filter' => 'adminfilter']);
+
+// Routes untuk Kepala Bagian
+$routes->get('kepala-bagian/verifikasi-ketidakhadiran', 'Admin\VerifikasiKetidakhadiran::index', ['filter' => 'kepalabagianfilter']);
+$routes->get('kepala-bagian/verifikasi-ketidakhadiran/detail/(:segment)', 'Admin\VerifikasiKetidakhadiran::detail/$1', ['filter' => 'kepalabagianfilter']);
+$routes->post('kepala-bagian/verifikasi-ketidakhadiran/verifikasi/(:segment)', 'Admin\VerifikasiKetidakhadiran::verifikasi/$1', ['filter' => 'kepalabagianfilter']);
+
+// Routes untuk Direktur  
+$routes->get('direktur/verifikasi-ketidakhadiran', 'Admin\VerifikasiKetidakhadiran::index', ['filter' => 'direkturfilter']);
+$routes->get('direktur/verifikasi-ketidakhadiran/detail/(:segment)', 'Admin\VerifikasiKetidakhadiran::detail/$1', ['filter' => 'direkturfilter']);
+$routes->post('direktur/verifikasi-ketidakhadiran/verifikasi/(:segment)', 'Admin\VerifikasiKetidakhadiran::verifikasi/$1', ['filter' => 'direkturfilter']);
+
 $routes->get('pegawai/dashboard', 'Pegawai\Home::index',['filter' => 'pegawaifilter']);
 $routes->post('pegawai/presensi_masuk', 'Pegawai\Home::presensi_masuk',['filter' => 'pegawaifilter']);
 $routes->post('pegawai/presensi_masuk_aksi', 'Pegawai\Home::presensi_masuk_aksi',['filter' => 'pegawaifilter']);
@@ -44,4 +68,16 @@ $routes->post('pegawai/presensi_keluar_aksi/(:segment)', 'Pegawai\Home::presensi
 
 $routes->get('pegawai/ubah_password', 'Login::ubahPassword', ['filter' => 'pegawaifilter']);
 $routes->post('pegawai/ubah_password_auth', 'Login::ubahPasswordAuth', ['filter' => 'pegawaifilter']);
+
+$routes->get('pegawai/ubah_username', 'Login::ubahUsername', ['filter' => 'pegawaifilter']);
+$routes->post('pegawai/ubah_username_auth', 'Login::ubahUsernameAuth', ['filter' => 'pegawaifilter']);
+
 $routes->get('pegawai/rekap_presensi', 'Pegawai\RekapPresensi::index', ['filter' => 'pegawaifilter']);
+
+// untuk keperluan rekap ketidakhadiran
+$routes->get('pegawai/ketidakhadiran', 'Pegawai\Ketidakhadiran::index', ['filter' => 'pegawaifilter']);
+$routes->get('pegawai/ketidakhadiran/create', 'Pegawai\Ketidakhadiran::create', ['filter' => 'pegawaifilter']);
+$routes->post('pegawai/ketidakhadiran/store', 'Pegawai\Ketidakhadiran::store', ['filter' => 'pegawaifilter']);
+$routes->get('pegawai/ketidakhadiran/edit/(:segment)', 'Pegawai\Ketidakhadiran::edit/$1', ['filter' => 'pegawaifilter']);
+$routes->post('pegawai/ketidakhadiran/update/(:segment)', 'Pegawai\Ketidakhadiran::update/$1', ['filter' => 'pegawaifilter']);
+$routes->get('pegawai/ketidakhadiran/delete/(:segment)', 'Pegawai\Ketidakhadiran::delete/$1', ['filter' => 'pegawaifilter']);

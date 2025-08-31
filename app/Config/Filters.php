@@ -36,6 +36,8 @@ class Filters extends BaseFilters
         'performance'   => PerformanceMetrics::class,
         'adminfilter'   => \App\Filters\AdminFilter::class,
         'pegawaifilter' => \App\Filters\PegawaiFilter::class,
+        'kepalabagianfilter' => \App\Filters\KepalaBagianFilter::class,
+        'direkturfilter' => \App\Filters\DirekturFilter::class,
     ];
 
     /**

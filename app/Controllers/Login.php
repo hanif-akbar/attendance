@@ -40,7 +40,7 @@ class Login extends BaseController
 
             $username = $this->request->getPost('username');
             $password = $this->request->getPost('password');
-            $checkusername = $loginModel->where('username', $username)->first();
+            $checkusername = $loginModel->getUserWithNama($username);
             
             if($checkusername){
                 $password_db = $checkusername['password'];
@@ -49,6 +49,7 @@ class Login extends BaseController
 
                     $session_data = [
                         'username' => $checkusername['username'],
+                        'nama' => $checkusername['nama'], // Add the 'nama' field to session data
                         'logged_in' => TRUE,
                         'role' => $checkusername['role'],
                         'id_pegawai' => $checkusername['id_pegawai'],
@@ -167,6 +168,113 @@ class Login extends BaseController
             return redirect()->back()->with('error', 'Gagal mengubah password');
         }
     }
+
+     public function ubahUsername()
+    {
+        // Cek apakah user sudah login dan memiliki role Pegawai
+        if (!session()->get('logged_in') || session()->get('role') !== 'Pegawai') {
+            return redirect()->to('/')->with('error', 'Akses ditolak');
+        }
+
+        $data = [
+            'title' => 'Ubah Username'
+        ];
+
+        return view('pegawai/ubah_username', $data);
+    }
+
+    // Method untuk memproses ubah username
+    public function ubahUsernameAuth()
+    {
+        // Cek apakah user sudah login dan memiliki role Pegawai
+        if (!session()->get('logged_in') || session()->get('role') !== 'Pegawai') {
+            return redirect()->to('/')->with('error', 'Akses ditolak');
+        }
+
+        // Validasi input
+        $rules = [
+            'password' => [
+                'label' => 'Password',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Password harus diisi untuk konfirmasi'
+                ]
+            ],
+            'new_username' => [
+                'label' => 'Username Baru',
+                'rules' => 'required|min_length[3]|max_length[50]|regex_match[/^[a-zA-Z0-9._-]+$/]|is_unique[users.username]',
+                'errors' => [
+                    'required' => 'Username baru harus diisi',
+                    'min_length' => 'Username minimal 3 karakter',
+                    'max_length' => 'Username maksimal 50 karakter',
+                    'regex_match' => 'Username hanya boleh menggunakan huruf, angka, titik, underscore, dan dash',
+                    'is_unique' => 'Username sudah digunakan oleh user lain, silakan pilih username yang berbeda'
+                ]
+            ],
+            'confirm_username' => [
+                'label' => 'Konfirmasi Username',
+                'rules' => 'required|matches[new_username]',
+                'errors' => [
+                    'required' => 'Konfirmasi username harus diisi',
+                    'matches' => 'Konfirmasi username tidak cocok dengan username baru'
+                ]
+            ]
+        ];
+
+        if (!$this->validate($rules)) {
+            return redirect()->back()->with('errors', $this->validator->getErrors());
+        }
+
+        // Ambil data dari form
+        $password = $this->request->getPost('password');
+        $new_username = $this->request->getPost('new_username');
+        $current_username = session()->get('username');
+
+        // Cek apakah username baru sama dengan username lama
+        if ($new_username === $current_username) {
+            return redirect()->back()->with('error', 'Username baru tidak boleh sama dengan username saat ini');
+        }
+
+        // Ambil user ID dari session
+        $user_id = session()->get('user_id');
+        
+        // Cari user berdasarkan ID
+        $user = $this->usersModel->find($user_id);
+
+        if (!$user) {
+            return redirect()->back()->with('error', 'User tidak ditemukan');
+        }
+
+        // Verifikasi password
+        if (!password_verify($password, $user['password'])) {
+            return redirect()->back()->with('error', 'Password salah');
+        }
+
+        // Double check username uniqueness (untuk keamanan ekstra)
+        $existingUser = $this->usersModel->where('username', $new_username)
+                                         ->where('id !=', $user_id)
+                                         ->first();
+        
+        if ($existingUser) {
+            return redirect()->back()->with('error', 'Username sudah digunakan oleh user lain');
+        }
+
+        // Update username di database
+        $update_data = [
+            'username' => $new_username
+        ];
+
+        if ($this->usersModel->update($user_id, $update_data)) {
+            // Update session dengan username baru
+            session()->set('username', $new_username);
+            
+            session()->setFlashdata('success', 'Username berhasil diubah menjadi: ' . $new_username);
+            return redirect()->to('pegawai/dashboard')->with('success', 'Username berhasil diubah');
+        } else {
+            return redirect()->back()->with('error', 'Gagal mengubah username');
+        }
+    }
+
 
     // public function prosesUbahPassword()
     // {

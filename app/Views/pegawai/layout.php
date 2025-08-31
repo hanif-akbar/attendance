@@ -79,7 +79,7 @@
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
             <img src="<?= base_url('assets/img/profile-img.jpg') ?>" alt="Profile" class="rounded-circle">
-            <span class="d-none d-md-block dropdown-toggle ps-2"><?= session()->get('username') ?></span>
+            <span class="d-none d-md-block dropdown-toggle ps-2"><?= session()->get('nama') ? session()->get('nama') : session()->get('username') ?></span>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
@@ -91,10 +91,20 @@
               <hr class="dropdown-divider">
             </li>
 
-            <li>
+            <!-- <li>
               <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
                 <i class="bi bi-person"></i>
                 <span>My Profile</span>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li> -->
+
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="<?= base_url('pegawai/ubah_username') ?>">
+                <i class="bi bi-person-fill"></i>
+                <span>Ubah Username</span>
               </a>
             </li>
             <li>
@@ -173,12 +183,12 @@
               <i class="bi bi-circle"></i><span>Rekap Presensi</span>
             </a>
           </li>
-          <!-- <li>
-            <a href="forms-layouts.html">
-              <i class="bi bi-circle"></i><span>Rekap Mingguan</span>
+          <li>
+            <a href="<?= base_url('pegawai/ketidakhadiran') ?>">
+              <i class="bi bi-circle"></i><span>Ketidakhadiran</span>
             </a>
           </li>
-          <li>
+          <!-- <li>
             <a href="forms-editors.html">
               <i class="bi bi-circle"></i><span>Rekap Bulanan</span>
             </a>
@@ -231,7 +241,7 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Dashboard</h1>
+      <h1><?= $title ?></h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="<?= base_url('pegawai/dashboard') ?>">Pegawai</a></li>
@@ -321,6 +331,31 @@ Toast.fire({
 });
     return false;
     })
+
+
+    // sweet alert konvirmation delete
+
+$(document).ready(function() {
+    $('.tombol-hapus').on('click', function() {
+        var getLink = $(this).attr('href');
+
+        Swal.fire({
+            title: "Yakin Hapus?",
+            text: "Data yang sudah di hapus tidak bisa di kembalikan!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = getLink;
+            }
+        });
+        return false;
+    });
+});
+
 </script>
 
 

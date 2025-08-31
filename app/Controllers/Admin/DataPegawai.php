@@ -19,11 +19,22 @@ class DataPegawai extends BaseController
     public function index()
     {
         $pegawaiModel = new PegawaiModel();
+        $search = $this->request->getGet('search');
+        $perPage = 10; // Jumlah data per halaman
+        
+        if ($search) {
+            $pegawai = $pegawaiModel->searchPegawai($search);
+            $pager = null;
+        } else {
+            $pegawai = $pegawaiModel->getPegawaiPaginated($perPage);
+            $pager = $pegawaiModel->pager;
+        }
 
         $data = [
             'title' => 'Data Pegawai',
-            'pegawai' => $pegawaiModel->findAll(),
-            'pegawai' => $pegawaiModel->getPegawai(),
+            'pegawai' => $pegawai,
+            'pager' => $pager,
+            'search' => $search,
         ];
 
         return view('admin/data_pegawai/data_pegawai', $data);
@@ -31,9 +42,17 @@ class DataPegawai extends BaseController
     public function detail($id)
     {
         $pegawaiModel = new PegawaiModel();
+        $pegawai = $pegawaiModel->detailPegawai($id);
+        
+        // Validasi apakah data pegawai ditemukan
+        if (!$pegawai) {
+            session()->setFlashdata('error', 'Data pegawai tidak ditemukan');
+            return redirect()->to(base_url('admin/data_pegawai'));
+        }
+        
         $data = [
             'title' => 'Detail Pegawai',
-            'pegawai' => $pegawaiModel->detailPegawai($id),
+            'pegawai' => $pegawai,
         ];
 
         return view('admin/data_pegawai/detail', $data);
@@ -100,9 +119,9 @@ class DataPegawai extends BaseController
                 ],
             ],
             'foto' => [
-                'rules' => 'uploaded[foto]|is_image[foto]|mime_in[foto,image/jpg,image/jpeg,image/png]|max_size[foto,1048]',
+                'rules' => 'is_image[foto]|mime_in[foto,image/jpg,image/jpeg,image/png]|max_size[foto,1048]',
                 'errors' => [
-                    'required' => 'Foto Wajib diUploade',
+                    // 'uploaded' => 'Foto Wajib diUploade',
                     'max_size' => 'Ukuran Foto lebih dari 1MB',
                     'is_image' => 'Yang Anda Pilih Bukan Foto',
                     'mime_in' => 'Foto Harus JPG, JPEG, PNG',
@@ -216,15 +235,24 @@ class DataPegawai extends BaseController
         $divisiModel = new DivisiModel();
         $clockInOutLocationModel = new ClockInOutLocationModel();
         $pegawaiModel = new PegawaiModel();
+        
+        // Ambil data pegawai
+        $pegawai = $pegawaiModel->detailPegawai($id);
+        
+        // Validasi apakah data pegawai ditemukan
+        if (!$pegawai) {
+            session()->setFlashdata('error', 'Data pegawai tidak ditemukan');
+            return redirect()->to(base_url('admin/data_pegawai'));
+        }
+        
         $data = [
             'title' => 'Edit Data Pegawai',
-            'pegawai' => $pegawaiModel->detailPegawai($id),
+            'pegawai' => $pegawai,
             'clock_in_out_location' => $clockInOutLocationModel->findAll(),
             'jabatan' => $jabatanModel->orderBy('jabatan','ASC')->findAll(),
             'divisi' => $divisiModel->orderBy('divisi','ASC')->findAll(),
             'validation' => \Config\Services::validation(),
         ];
-        // dd($data['jabatan']);
 
         return view('admin/data_pegawai/edit', $data);
     }

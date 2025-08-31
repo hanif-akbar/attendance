@@ -11,4 +11,11 @@ class LoginModel extends Model
     protected $allowedFields    = ['id_pegawai' , 'username', 'password', 'status', 'role'];
 
 
+    public function getUserWithNama($username)
+    {
+        return $this->select('users.*, pegawai.nama')
+                    ->join('pegawai', 'pegawai.id = users.id_pegawai', 'left')
+                    ->where('users.username', $username)
+                    ->first();
+    }
 }

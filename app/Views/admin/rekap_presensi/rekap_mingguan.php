@@ -11,6 +11,9 @@
   <div class="col-auto">
     <button type="submit" class="btn btn-primary mb-3">Tampilkan</button>
   </div>
+  <div class="col-auto">
+    <button type="submit" name="export_excel_mingguan" class="btn btn-success mb-3">Export Excel</button>
+  </div>
 </form>
     
 <table class = "table table-striped table-bordered">
